@@ -14,11 +14,11 @@ not_primes = []
 for i in range(len(numbers)): # для сортированного списка проще было бы указать range(1, len(numbers))
     is_prime = True # установка/обновление флага
 
-    if numbers[i] == 1: # проверка на единицу (если список не отсортирован, не будет проверяться)
+    if numbers[i] == 1: # проверка на единицу (в сортированном списке не требуется)
         continue
 
     for j in range(len(numbers)):
-        if numbers[j] == 1: # проверка на единицу (если список не отсортирован, не помешает расчёту)
+        if numbers[j] == 1:
             continue
         if numbers[j] < numbers[i]: # основная проверка на простоту числа и прекращение перебора
             if numbers[i] % numbers[j] == 0:
