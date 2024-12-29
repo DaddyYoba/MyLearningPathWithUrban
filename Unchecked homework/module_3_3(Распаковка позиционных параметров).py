@@ -8,7 +8,7 @@ def print_params(a = 1, b = 'строка', c = True):
 
 count = 0
 values_list = ['НеСтрокаЧестноАвтичаю', ['Down', 'with', 'the,' 'sickness'], 69.420]
-values_dict = {'a': 19, 'b': ([([(["FFDP"])])],[([(["AILD"])], [(["Ice Nine Kills"])])]), 'c': False}
+values_dict = {'a': 27, 'b': ([([(["FFDP"])])],[([(["AILD"])], [(["Ice Nine Kills"])])]), 'c': False}
 values_list_2 = [54.32, 'Строка' ]
 
 print_params(*values_list)
