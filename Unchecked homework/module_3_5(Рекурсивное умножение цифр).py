@@ -8,7 +8,7 @@ def get_multiplied_digits(number):
 
 result = get_multiplied_digits(40203)
 print(result)
-result2 = get_multiplied_digits(402039)
+result2 = get_multiplied_digits(402030)
 print(result2)
 # Результат второго вывода равен нулю, а задание заявляет, что 24. Честно говоря, я не могу этого понять.
 # Примечание 1 указывает именно на первые нули числа, а если число состоит из нуля?
