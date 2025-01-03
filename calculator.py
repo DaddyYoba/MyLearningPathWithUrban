@@ -4,7 +4,7 @@ from tkinter import ttk
 def addition():
     if number1_entry.get().isdecimal() and number2_entry.get().isdecimal():
         answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=0, string=str(int(number1_entry.get()) + int(number2_entry.get())))
+        answer_entry.insert(index=0, string=str(int(number1_entry.get()) + int(number2_entry.get()) + variation))
     else:
         answer_entry.delete(0, len(answer_entry.get()))
         answer_entry.insert(index=-1, string='Требуются целые числа')
@@ -12,7 +12,7 @@ def addition():
 def subtraction():
     if number1_entry.get().isdecimal() and number2_entry.get().isdecimal():
         answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=0, string=str(int(number1_entry.get()) - int(number2_entry.get())))
+        answer_entry.insert(index=0, string=str(int(number1_entry.get()) - int(number2_entry.get()) - variation))
     else:
         answer_entry.delete(0, len(answer_entry.get()))
         answer_entry.insert(index=-1, string='Требуются целые числа')
@@ -20,7 +20,7 @@ def subtraction():
 def multiplication():
     if number1_entry.get().isdecimal() and number2_entry.get().isdecimal():
         answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=0, string=str(int(number1_entry.get()) * int(number2_entry.get())))
+        answer_entry.insert(index=0, string=str(int(number1_entry.get()) * int(number2_entry.get()) * (variation + 1)))
     else:
         answer_entry.delete(0, len(answer_entry.get()))
         answer_entry.insert(index=-1, string='Требуются целые числа')
@@ -31,13 +31,15 @@ def division():
         answer_entry.insert(index=-1, string='На ноль делить нельзя!')
     elif number1_entry.get().isdecimal() and number2_entry.get().isdecimal():
         answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=0, string=str(round(int(number1_entry.get()) / int(number2_entry.get()), 2)))
+        answer_entry.insert(index=0, string=str(round(int(number1_entry.get()) / int(number2_entry.get()) / (variation + 1), 2)))
     else:
         answer_entry.delete(0, len(answer_entry.get()))
         answer_entry.insert(index=-1, string='Требуются целые числа')
 
 def troll():
+    global variation
     if random.randint(1,10) % 5 == 0:
+        variation = random.randint(1,3)
         troll_w = tk.Toplevel()
 
         label = tk.Label(troll_w, text="Бу! Испугался? Не бойся, я друг, я тебя не обижу.\nИди сюда, иди ко мне, сядь рядом со мной, посмотри мне в глаза.\nТы видишь меня? Я тоже тебя вижу.\nДавай смотреть друг на друга до тех пор, пока наши глаза не устанут.\nТы не хочешь? Почему? Что-то не так?")
@@ -46,6 +48,8 @@ def troll():
         button_close = tk.Button(troll_w, text="Сесть рядом", command=troll_w.destroy)
         button_close.pack(fill='x')
 window = tk.Tk()
+
+variation = 0
 
 style = ttk.Style()
 style.theme_use('xpnative')
