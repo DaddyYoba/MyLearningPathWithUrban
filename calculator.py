@@ -1,40 +1,46 @@
 import random
 import tkinter as tk
 from tkinter import ttk
-def addition():
+def get_numbers():
     if number1_entry.get().isdecimal() and number2_entry.get().isdecimal():
-        answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=0, string=str(int(number1_entry.get()) + int(number2_entry.get()) + variation))
+        num1 = int(number1_entry.get())
+        num2 = int(number2_entry.get())
+        return num1, num2
+    return 'Error', 'Error'
+
+def place_answer(res):
+    answer_entry.delete(0, 'end')
+    answer_entry.insert(0, res)
+
+def addition():
+    number1, number2 = get_numbers()
+    if number1 == 'Error' or number2 == 'Error':
+        place_answer('Требуются целые числа')
     else:
-        answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=-1, string='Требуются целые числа')
+        place_answer(number1 + number2 + variation)
 
 def subtraction():
-    if number1_entry.get().isdecimal() and number2_entry.get().isdecimal():
-        answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=0, string=str(int(number1_entry.get()) - int(number2_entry.get()) - variation))
+    number1, number2 = get_numbers()
+    if number1 == 'Error' or number2 == 'Error':
+        place_answer('Требуются целые числа')
     else:
-        answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=-1, string='Требуются целые числа')
+        place_answer(number1 - number2 - variation)
 
 def multiplication():
-    if number1_entry.get().isdecimal() and number2_entry.get().isdecimal():
-        answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=0, string=str(int(number1_entry.get()) * int(number2_entry.get()) * (variation + 1)))
+    number1, number2 = get_numbers()
+    if number1 == 'Error' or number2 == 'Error':
+        place_answer('Требуются целые числа')
     else:
-        answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=-1, string='Требуются целые числа')
+        place_answer(number1 * number2 + variation * 2)
 
 def division():
-    if number2_entry.get() == '0':
-        answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=-1, string='На ноль делить нельзя!')
-    elif number1_entry.get().isdecimal() and number2_entry.get().isdecimal():
-        answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=0, string=str(round(int(number1_entry.get()) / int(number2_entry.get()) / (variation + 1), 2)))
+    number1, number2 = get_numbers()
+    if number1 == 'Error' or number2 == 'Error':
+        place_answer('Требуются целые числа')
+    elif number2 == 0:
+        place_answer('На ноль делить нельзя')
     else:
-        answer_entry.delete(0, len(answer_entry.get()))
-        answer_entry.insert(index=-1, string='Требуются целые числа')
+        place_answer(round(number1 / number2 + variation / 2, 2))
 
 def troll():
     global variation
