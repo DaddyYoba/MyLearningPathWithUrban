@@ -1,38 +1,36 @@
-def calculate_structure_sum(data, *, result=None):
-    if result is None:
-        result = []
+def calculate_structure_sum(data):
+    sum = 0
 
     match data: # превратить if-elif-else в match-case помог chatgpt (ну и выглядит аккуратней)
-        case int() | float():
-            result.append(data)
+        case int() | float() | bool():
+            sum += data
         case str():
-            result.append(len(data))
-        case bool(): # Для добавления единицы при True и нуля при False
-            result.append(int(data)) # в целом можно добавить функционал подсчёта количества конечных значений
+            sum += len(data)
         case list() | tuple() | set():
             for i in data:
-                calculate_structure_sum(i, result=result)
+                sum += calculate_structure_sum(i)
         case dict():
             for key, value in data.items():
-                calculate_structure_sum(key, result=result)
-                calculate_structure_sum(value, result=result)
+                sum += calculate_structure_sum(key)
+                sum += calculate_structure_sum(value)
         case _:
             raise TypeError(f"Неподдерживаемый тип данных: {type(data)}")
 
-    # if isinstance(data, int):
-    #     result.append(data)
+    # if isinstance(data, int) or isinstance(data, float) or isinstance(data, bool):
+    #     sum += (data)
     # elif isinstance(data, str):
-    #     result.append(len(data))
+    #     sum += (len(data))
     # elif isinstance(data, list) or isinstance(data, tuple) or isinstance(data, set):
-    #     for i in data:
-    #         calculate_structure_sum(i, result=result)
+    #     sum += calculate_structure_sum(*args)
     # elif isinstance(data, dict):
-    #     for i, t in data.items():
-    #         calculate_structure_sum(i, result=result)
-    #         calculate_structure_sum(t, result=result)
-    # return sum(result)
+    #     for key, value in data.items():
+    #         sum += calculate_structure_sum(key)
+    #         sum += calculate_structure_sum(value)
+    # else:
+    #     raise TypeError(f"Неподдерживаемый тип данных: {type(data)}")
+    # return sum
 
-    return sum(result)
+    return sum
 
 
 data_structure = [
